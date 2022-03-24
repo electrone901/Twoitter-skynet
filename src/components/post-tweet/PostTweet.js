@@ -4,6 +4,7 @@ import './PostTweet.css'
 import { PhotoCamera } from '@material-ui/icons'
 import ImageIcon from '@material-ui/icons/Image';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
+import CircularStatic from '../commons/CircularProgressWithLabel'
 
 function Post({image, setMessage, setImage, createPost, onChangePicture}) {
   return (
@@ -11,7 +12,7 @@ function Post({image, setMessage, setImage, createPost, onChangePicture}) {
       <Container style={{paddingTop: '2rem', paddingBottom: '2rem'}}>
         <Grid container>
           <Grid item xs={2} sm={2}>
-            <img src="https://avatars.githubusercontent.com/u/79016171?s=400&u=9376daf7bc67c804b89790ffc455fb5981c6d369&v=4" alt="img-profile" id="person"/>
+            <img src="https://avatars.githubusercontent.com/u/10853211?v=4" alt="img-profile" id="person"/>
           </Grid>
           <Grid item xs={10} sm={10}>
 
@@ -28,7 +29,7 @@ function Post({image, setMessage, setImage, createPost, onChangePicture}) {
           />
           {
             image ? (
-              <img src={URL.createObjectURL(image)} alt="img-preview" className='img-prev' />
+              <img src={URL.createObjectURL(image)} alt="img-preview" style={{width:'100%' }} />
             ):
             ''
           }

@@ -15,35 +15,36 @@ import {
 import CircularStatic from '../commons/CircularProgressWithLabel'
 import './tweet.css'
 
-const posts = [
-  {
-    name: 'Joe Smith',
-    handle: '@Jsmith',
-    date: 'March 10',
-    message: 'HandShake is awesome 😎',
-    likeNumber: '25',
-    comment: '1',
-  },
-  {
-    name: 'ali turkaman',
-    handle: '@ATurkaman',
-    date: 'Aug 10',
-    message:
-      'HandShake is awesome 😎 HandShake is awesome 😎 HandShake is awesome 😎',
-    likeNumber: '25',
-    comment: '1',
-  },
-  {
-    name: 'ali turkaman',
-    handle: '@ATurkaman',
-    date: 'Aug 10',
-    message: 'HandShake is awesome 😎',
-    likeNumber: '25',
-    comment: '1',
-  },
-]
+// const posts = [
+//   {
+//     name: 'Joe Smith',
+//     handle: '@Jsmith',
+//     date: 'March 10',
+//     message: 'HandShake is awesome 😎',
+//     likeNumber: '25',
+//     comment: '1',
+//   },
+//   {
+//     name: 'ali turkaman',
+//     handle: '@ATurkaman',
+//     date: 'Aug 10',
+//     message:
+//       'HandShake is awesome 😎 HandShake is awesome 😎 HandShake is awesome 😎',
+//     likeNumber: '25',
+//     comment: '1',
+//   },
+//   {
+//     name: 'ali turkaman',
+//     handle: '@ATurkaman',
+//     date: 'Aug 10',
+//     message: 'HandShake is awesome 😎',
+//     likeNumber: '25',
+//     comment: '1',
+//   },
+// ]
 
-const Tweet = (props) => {
+const Tweet = ({ posts }) => {
+  console.log('🚀 ~ file: tweet.js ~ line 47 ~ Tweet ~ posts', posts)
   const [like, setLike] = useState(false)
   const [loading, setLoading] = useState(false)
   const likeHandler = () => {
@@ -69,7 +70,7 @@ const Tweet = (props) => {
                       <CardMedia
                         component="img"
                         height="184"
-                        image="https://avatars.githubusercontent.com/u/79016171?s=400&u=9376daf7bc67c804b89790ffc455fb5981c6d369&v=4"
+                        image="https://avatars.githubusercontent.com/u/10853211?v=4"
                         alt="post-profile"
                         id="person"
                       />
@@ -82,12 +83,20 @@ const Tweet = (props) => {
                         }}
                       >
                         <p className="info">
-                          ID: <strong>{post.name}</strong>
+                          <strong>User name: </strong>Guest
                         </p>
-                        <p className="info">
-                          Create At: <strong>{post.date}</strong>
-                        </p>
-                        <p className="info">{post.message}</p>
+                        <p className="info">{post.description}</p>
+
+                        {post.image ? (
+                          <img
+                            src={post.image}
+                            alt="tweets"
+                            style={{ width: '100%' }}
+                          />
+                        ) : (
+                          ' '
+                        )}
+
                         {/* <p className="info">
                         Amount: <strong>{nft.amount}</strong>
                       </p>
@@ -122,7 +131,7 @@ const Tweet = (props) => {
                         <span className="comment" id="nav-icon-box">
                           <FaRegComment />
                         </span>
-                        <p id="comment-tweet"> {props.comment} </p>
+                        <p id="comment-tweet"> {0} </p>
                       </div>
                       <span className="retweet" id="nav-icon-box">
                         <AiOutlineRetweet />
@@ -140,9 +149,7 @@ const Tweet = (props) => {
                           )}
                         </span>
                         <span id="like-number">
-                          {like === true
-                            ? parseInt(post.likeNumber) + 1
-                            : props.likeNumber}
+                          {like === true ? parseInt(post.likeNumber) + 1 : 0}
                         </span>
                       </div>
                       <span className="share" id="nav-icon-box">

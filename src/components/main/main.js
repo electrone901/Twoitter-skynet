@@ -15,6 +15,7 @@ const dataKey = 'datakey'
 const Main = () => {
   const [message, setMessage] = useState('')
   const [image, setImage] = useState('')
+  const [posts, setPosts] = useState('')
   const [imgData, setImgData] = useState('')
   const [follow, setFollow] = useState(true)
   console.log('message', message, image)
@@ -44,18 +45,21 @@ const Main = () => {
     }
   }
 
-
   const createPost = async () => {
     console.log('eee', imgData, message)
     // const { skylink } = await client.uploadFile(imgData)
     const dataImage = await client.uploadFile(image)
     const imgLink = dataImage.skylink
 
-    console.log("🚀 ~ file: main.js ~ line 53 ~ createPost ~ imgLink", imgLink)
-    console.log("🚀 data", dataImage.skylink)
+    console.log('🚀 ~ file: main.js ~ line 53 ~ createPost ~ imgLink', imgLink)
+    console.log('🚀 data', dataImage.skylink)
+
+    // skylinks start with `sia://` and don't specify a portal URL
+    // generate URLs for our current portal though.
+    const skylinkUrl = await client.getSkylinkUrl(imgLink)
 
     const obj = {
-      image: dataImage.skylink,
+      image: skylinkUrl,
       description: message,
     }
     let { data } = await client.db.getJSON(publicKey, dataKey)
@@ -67,23 +71,17 @@ const Main = () => {
     }
     // add data to skynet
     const result = await client.db.setJSON(privateKey, dataKey, data)
-    console.log("🚀🚀🚀  result", result)
+    window.location.reload()
+    // call here
+    // console.log('🚀🚀🚀  result', result)
+    // if(result) {
+
+    // }
   }
 
   const fetchData = async () => {
     let { data } = await client.db.getJSON(publicKey, dataKey)
-    console.log('data', data)
-    // const json = {
-    //   title: 'this.title',
-    //   description: 'this.description'
-    // }
-    // if(data.length) {
-    //   data.unshift(json);
-    // }
-    // else {
-    //   data = [json];
-    // }
-    // await client.db.setJSON(privateKey, dataKey, data)
+    setPosts(data)
   }
 
   return (
@@ -171,7 +169,7 @@ const Main = () => {
 
       <div id="line"></div>
 
-      <Tweet />
+      <Tweet posts={posts} />
 
       {/* <Tweet
         tweet="😎این یک متن ساختگی برای این پروژه است"
