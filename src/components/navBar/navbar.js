@@ -9,17 +9,18 @@ import {
 import { IoNotificationsOutline } from 'react-icons/io5'
 import { RiFileList2Line, RiContactsFill } from 'react-icons/ri'
 import { CgMoreO, CgMoreAlt } from 'react-icons/cg'
+import logo from '../images/logo.png'
 
 const NavBar = () => {
   return (
     <div id="container-nav">
       <div id="nav-up">
         <span id="">
-          {/* <img
-            src="https://www.kindpng.com/picc/m/20-203316_bird-icon-png-transparent-cartoon-bird-transparent-png.png"
-            alt=""
+          <img
+            src={logo}
+            alt="Dao logo"
             id="twitter-icon"
-          /> */}
+          />
           <FaTwitter id="twitter-icon" />
         </span>
         <button id="row">
